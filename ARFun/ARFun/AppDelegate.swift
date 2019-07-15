@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  ARFun
-//
-//  Created by Tiwari, Niraj | Nero | OSPD on 2019/07/15.
-//  Copyright © 2019 TLabs. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
