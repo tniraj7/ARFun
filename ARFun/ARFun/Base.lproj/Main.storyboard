@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.15"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="iOS 13.0 system colors" minToolsVersion="11.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -19,13 +20,55 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mfC-zb-FUK">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </arscnView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hqu-ZC-BZQ">
+                                <rect key="frame" x="20" y="811" width="70" height="45"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="DDU-IU-vjV"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="wn2-BC-YVJ"/>
+                                </constraints>
+                                <state key="normal" title="Add">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addNode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mrJ-NQ-tgY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ys-9b-kzw">
+                                <rect key="frame" x="324" y="811" width="70" height="45"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="systemOrangeColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="H0a-yI-L4j"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="ywE-Du-BhZ"/>
+                                </constraints>
+                                <state key="normal" title="Reset">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="resetScene:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pBX-Nh-rET"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="4Ys-9b-kzw" secondAttribute="bottom" constant="40" id="2PG-Eg-PQb"/>
+                            <constraint firstAttribute="trailing" secondItem="4Ys-9b-kzw" secondAttribute="trailing" constant="20" id="3qC-7j-397"/>
+                            <constraint firstItem="Hqu-ZC-BZQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="Pxf-Sq-a7U"/>
                             <constraint firstAttribute="trailing" secondItem="mfC-zb-FUK" secondAttribute="trailing" id="b8f-P5-5iq"/>
                             <constraint firstItem="mfC-zb-FUK" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="fgF-BC-dYQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Hqu-ZC-BZQ" secondAttribute="trailing" symbolic="YES" id="o5a-o1-LRi"/>
                             <constraint firstItem="mfC-zb-FUK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="pdl-a0-7Lr"/>
+                            <constraint firstAttribute="bottom" secondItem="Hqu-ZC-BZQ" secondAttribute="bottom" constant="40" id="uxR-93-jnI"/>
                             <constraint firstAttribute="bottom" secondItem="mfC-zb-FUK" secondAttribute="bottom" id="vo7-FE-ve6"/>
+                            <constraint firstItem="4Ys-9b-kzw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hqu-ZC-BZQ" secondAttribute="trailing" constant="8" symbolic="YES" id="we6-mr-4v2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
