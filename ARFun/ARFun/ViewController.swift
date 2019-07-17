@@ -1,7 +1,7 @@
 import UIKit
 import  ARKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet weak var sceneView: ARSCNView!
     
@@ -13,17 +13,31 @@ class ViewController: UIViewController {
         self.sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
         self.sceneView.session.run(self.config)
         self.sceneView.autoenablesDefaultLighting = true
+        self.sceneView.showsStatistics = true
         self.addTapGestureToSceneView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.sceneView.session.run(self.config)
+        self.sceneView.session.run(config)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.sceneView.session.pause()
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval) {
+        print("rendering")
+        guard let pointOfView = sceneView.pointOfView else { return }
+        let transform = pointOfView.transform
+        let orientation = SCNVector3(transform.m31, transform.m32, transform.m33)
+        let location = SCNVector3(transform.m41, transform.m42, transform.m43)
+        let currentPositionOfCamera = orientation + location
+        print(orientation.x,
+              orientation.y,
+              orientation.z
+        )
     }
     
     @IBAction func addNode(_ sender: Any) {
@@ -70,4 +84,17 @@ class ViewController: UIViewController {
         }
         self.sceneView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
     }
+    
+    @IBAction func drawIn3DSpace(_ sender: Any) {
+        
+    }
+}
+
+func +(left: SCNVector3, right: SCNVector3) -> SCNVector3 {
+    
+    return SCNVector3Make(
+        left.x + right.x,
+        left.y + right.y,
+        left.z + right.z
+    )
 }
