@@ -4,7 +4,7 @@ import  ARKit
 class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet weak var sceneView: ARSCNView!
-    
+    @IBOutlet weak var draw: UIButton!
     let config = ARWorldTrackingConfiguration()
     
     override func viewDidLoad() {
@@ -28,16 +28,34 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval) {
-        print("rendering")
         guard let pointOfView = sceneView.pointOfView else { return }
         let transform = pointOfView.transform
-        let orientation = SCNVector3(transform.m31, transform.m32, transform.m33)
+        let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
         let location = SCNVector3(transform.m41, transform.m42, transform.m43)
         let currentPositionOfCamera = orientation + location
-        print(orientation.x,
-              orientation.y,
-              orientation.z
-        )
+        DispatchQueue.main.async {
+            if self.draw.isHighlighted {
+
+                let sphereNode = SCNNode(geometry: SCNSphere(radius: 0.02))
+                sphereNode.position = currentPositionOfCamera
+                self.sceneView.scene.rootNode.addChildNode(sphereNode)
+                sphereNode.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+            } else {
+                
+                let pointer = SCNNode(geometry: SCNSphere(radius: 0.01))
+                pointer.name = "pointer"
+                pointer.position = currentPositionOfCamera
+                
+                self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+                    if node.name == "pointer" {
+                        node.removeFromParentNode()
+                    }
+                }
+                
+                self.sceneView.scene.rootNode.addChildNode(pointer)
+                pointer.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+            }
+        }
     }
     
     @IBAction func addNode(_ sender: Any) {
@@ -79,14 +97,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func restartSession() {
         self.sceneView.session.pause()
-        self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
-            node.removeFromParentNode()
+        DispatchQueue.main.async {
+            self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+                node.removeFromParentNode()
+            }
         }
         self.sceneView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
-    }
-    
-    @IBAction func drawIn3DSpace(_ sender: Any) {
-        
     }
 }
 
