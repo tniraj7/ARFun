@@ -1,2 +1,5 @@
 # ARFun
-Play with the 3D objects in augmented reality using this app.
+Draw in 3D space using augmented reality with this app.
+
+## Demo
+![](demo1.gif)       ![](demo2.gif)
